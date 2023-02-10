@@ -1,10 +1,12 @@
 def feistel(plaintext, key, rounds):
+    #Generer la cle
     def split(word):
         return [char for char in word]
     def xor(a, b):
         return ''.join([chr(ord(x)^ord(y))for (x, y) in zip(a,b)])
     def f_function(block, key):
         return xor(block, key)
+    #Crypter le texte
     def encrypt_block(plaintext_block,key, rounds):
         L = plaintext_block[:len(plaintext_block)//2]
         R = plaintext_block[len(plaintext_block)//2:]
@@ -19,5 +21,5 @@ def feistel(plaintext, key, rounds):
         encrypted = [encrypt_block(plaintext[i:i+2], key, rounds) for i in range(0, len(plaintext), 2)]
         return ''.join(encrypted)
     return encrypt(plaintext, key, rounds)
-#Calling the algorithm
+#Appeller la fonction principal
 print(feistel('Bonjour', 'Heyo100', 80000))
